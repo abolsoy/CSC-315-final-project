@@ -4,8 +4,8 @@
     <string name="password_label">Password</string>
     <string name="hello">Welcome %1$s!</string>
     <string name="hello_new_user">Welcome %1$s! Thank you for creating an account with Pickle!</string>
-    <string name="logout">Logout</string>
-    <string name="login">Login</string>
-    <string name="register">Create New Account</string>
+    <string name="logout">Sign Out</string>
+    <string name="login">Sign In</string>
+    <string name="register">Sign Up</string>
     <string name="firestore_button">Launch Firestore Activity</string>
 </resources>

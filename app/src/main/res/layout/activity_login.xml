@@ -100,6 +100,8 @@
             android:layout_height="wrap_content"
             android:text="@string/login"
             android:onClick="signIn"
+            android:backgroundTint="@color/blue"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/password"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -110,6 +112,8 @@
             android:layout_height="wrap_content"
             android:text="@string/register"
             android:onClick="createAccount"
+            android:backgroundTint="@color/blue"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/login_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
