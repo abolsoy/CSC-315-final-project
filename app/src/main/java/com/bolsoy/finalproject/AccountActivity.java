@@ -15,6 +15,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 // App should log off when the app is killed.
 
+// "Home" screen
+
 public class AccountActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
