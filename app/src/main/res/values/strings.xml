@@ -8,4 +8,9 @@
     <string name="login">Sign In</string>
     <string name="register">Sign Up</string>
     <string name="firestore_button">Launch Firestore Activity</string>
+    <string name="create">Create New Listing</string>
+    <string name="post">Post Item Listing</string>
+    <string name="title_label">Title</string>
+    <string name="description_label">Description</string>
+    <string name="price_label">Price $</string>
 </resources>

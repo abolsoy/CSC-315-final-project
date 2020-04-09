@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mAuth.signOut();
+        updateUI(null);
     }
 
     private void updateUI(FirebaseUser currentUser) {

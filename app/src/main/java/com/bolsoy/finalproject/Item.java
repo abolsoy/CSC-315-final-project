@@ -1,20 +1,23 @@
 package com.bolsoy.finalproject;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.Date;
 
 public class Item {
 
     private String title;
     private String description;
-    private float price;
+    private String price;
     private Date postedTime;
+    private FirebaseAuth mAuth;
 
     // No-argument constructor is required to support conversion of Firestore document to POJO
     public Item() {
     }
 
     // All-argument constructor is required to support conversion of Firestore document to POJO
-    public Item(String title, String description, float price, Date postedTime) {
+    public Item(String title, String description, String price, Date postedTime) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -29,7 +32,7 @@ public class Item {
         return description;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return price;
     }
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class AccountActivity extends AppCompatActivity {
 
+    private static final String TAG = "AccountActivity";
     private FirebaseAuth mAuth;
     private TextView mNameLabel;
 
@@ -47,6 +49,12 @@ public class AccountActivity extends AppCompatActivity {
             mNameLabel.setText(String.format(getResources().getString(R.string.hello), currentUser.getEmail()));
         } else {
         }
+    }
+
+    public void createListing(View view) {
+        Log.w(TAG, "createListing() called");
+        Intent intent = new Intent(this, CreateItemActivity.class);
+        startActivity(intent);
     }
 
     public void signOut(View view) {
