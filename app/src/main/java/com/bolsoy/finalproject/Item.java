@@ -11,17 +11,19 @@ public class Item {
     private String price;
     private Date postedTime;
     private FirebaseAuth mAuth;
+    private String email;
 
     // No-argument constructor is required to support conversion of Firestore document to POJO
     public Item() {
     }
 
     // All-argument constructor is required to support conversion of Firestore document to POJO
-    public Item(String title, String description, String price, Date postedTime) {
+    public Item(String title, String description, String price, Date postedTime, String email) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.postedTime = postedTime;
+        this.email = email;
     }
 
     public String getTitle() {
@@ -34,6 +36,10 @@ public class Item {
 
     public String getPrice() {
         return price;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public Date getPostedTime() {
