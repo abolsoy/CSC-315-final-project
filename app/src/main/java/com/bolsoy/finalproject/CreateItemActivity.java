@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -82,6 +83,11 @@ public class CreateItemActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public void goHome() {
+        Intent intent = new Intent(this, AccountActivity.class);
+        startActivity(intent);
     }
 
     private boolean validateForm() {

@@ -13,4 +13,7 @@
     <string name="title_label">Title</string>
     <string name="description_label">Description</string>
     <string name="price_label">Price $</string>
+    <string name="buy">Buy Item</string>
+    <string name="title_id_label">Title</string>
+    <string name="item_price_label">Price</string>
 </resources>
