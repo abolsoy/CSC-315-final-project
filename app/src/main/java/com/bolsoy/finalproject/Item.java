@@ -42,7 +42,7 @@ public class Item {
         return email;
     }
 
-    public Date getPostedTime() {
+    public Date getCreatedTime() {
         return postedTime;
     }
 }
