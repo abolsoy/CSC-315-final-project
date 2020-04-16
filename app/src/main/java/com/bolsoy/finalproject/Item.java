@@ -4,12 +4,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Date;
 
-public class Item {
+class Item {
 
     private String title;
     private String description;
     private String price;
-    private Date postedTime;
+    private Date createdTime;
     private FirebaseAuth mAuth;
     private String email;
 
@@ -18,11 +18,11 @@ public class Item {
     }
 
     // All-argument constructor is required to support conversion of Firestore document to POJO
-    public Item(String title, String description, String price, Date postedTime, String email) {
+    public Item(String title, String description, String price, Date createdTime, String email) {
         this.title = title;
         this.description = description;
         this.price = price;
-        this.postedTime = postedTime;
+        this.createdTime = createdTime;
         this.email = email;
     }
 
@@ -43,6 +43,6 @@ public class Item {
     }
 
     public Date getCreatedTime() {
-        return postedTime;
+        return createdTime;
     }
 }

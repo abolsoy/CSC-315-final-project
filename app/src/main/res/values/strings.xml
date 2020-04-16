@@ -14,7 +14,7 @@
     <string name="description_label">Description</string>
     <string name="price_label">Price $</string>
     <string name="buy">Buy Item</string>
-    <string name="title_id_label">Title</string>
-    <string name="item_price_label">Price</string>
-    <string name="created_on">Created on %1$s</string>
+    <string name="title_id_label"></string>
+    <string name="item_price_label">$</string>
+    <string name="created_on">Posted on %1$s</string>
 </resources>

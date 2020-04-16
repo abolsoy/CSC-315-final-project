@@ -18,7 +18,7 @@
             android:id="@+id/title_id_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_label"
+            android:text="@string/title_id_label"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/title_id_label"
             app:layout_constraintTop_toTopOf="@id/title_id_label" />
 
@@ -35,7 +36,7 @@
             android:id="@+id/item_price_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/price_label"
+            android:text="@string/item_price_label"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title_id_label" />
@@ -44,7 +45,7 @@
             android:id="@+id/item_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="3dp"
             app:layout_constraintStart_toEndOf="@id/item_price_label"
             app:layout_constraintTop_toTopOf="@id/item_price_label" />
 

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,8 +32,8 @@ public class AccountActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private TextView mNameLabel;
 
-//    private final FirebaseFirestore mDb = FirebaseFirestore.getInstance();
-//    private PersonRecyclerAdapter mAdapter;
+    private final FirebaseFirestore mDb = FirebaseFirestore.getInstance();
+    private ItemRecyclerAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,26 +46,56 @@ public class AccountActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
 
-//        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-//        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-//
-//        Query query = mDb.collection(PEOPLE)
-//                .orderBy("createdTime", Query.Direction.ASCENDING);
-//        FirestoreRecyclerOptions<Person> options = new FirestoreRecyclerOptions.Builder<Person>()
-//                .setQuery(query, Person.class)
-//                .build();
-//
-//        mAdapter = new PersonRecyclerAdapter(options, new PersonRecyclerAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position) {
-//                Person person = mAdapter.getSnapshots().getSnapshot(position).toObject(Person.class);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+        Query query = mDb.collection(ITEM)
+                .orderBy("createdTime", Query.Direction.ASCENDING);
+        FirestoreRecyclerOptions<Item> options = new FirestoreRecyclerOptions.Builder<Item>()
+                .setQuery(query, Item.class)
+                .build();
+
+        mAdapter = new ItemRecyclerAdapter(options, new ItemRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+                // Try passing item object through intent
+                Item item = mAdapter.getSnapshots().getSnapshot(position).toObject(Item.class);
+                String email = item.getEmail();
+                String title = item.getTitle();
+                String id = mAdapter.getSnapshots().getSnapshot(position).getId();
+                itemClick(id);
+
+//                Item item = mAdapter.getSnapshots().getSnapshot(position).toObject(Item.class);
 //                String id = mAdapter.getSnapshots().getSnapshot(position).getId();
-//                mDb.collection(PEOPLE).document(id).delete();
+//                mDb.collection(ITEM).document(id).delete();
 //
-//                Toast.makeText(getApplicationContext(),"Deleting " + person.getUserId(),Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        recyclerView.setAdapter(mAdapter);
+//                Toast.makeText(getApplicationContext(),"Deleting " + item.getTitle(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        recyclerView.setAdapter(mAdapter);
+    }
+
+    public void itemClick(String id) {
+        Log.w(TAG, "itemClick() function");
+        Intent intent = new Intent(this, ViewItemActivity.class);
+//        intent.putExtra("email", email);
+        intent.putExtra("id", id);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mAdapter != null) {
+            mAdapter.stopListening();
+        }
     }
 
     @Override

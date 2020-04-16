@@ -1,5 +1,6 @@
 package com.bolsoy.finalproject;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,9 @@ public class ItemRecyclerAdapter extends FirestoreRecyclerAdapter<Item, ItemRecy
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.itemTitle.setText(item.getTitle());
+        Log.w("ItemRecyclerAdapterAlex", item.getTitle());
         holder.itemPrice.setText(item.getPrice());
+        Log.w("ItemRecyclerAdapterAlex", item.getPrice());
         holder.createdOn.setText(holder.view.getContext()
                 .getString(R.string.created_on, format.format(item.getCreatedTime())));
         holder.view.setOnClickListener(new View.OnClickListener() {
