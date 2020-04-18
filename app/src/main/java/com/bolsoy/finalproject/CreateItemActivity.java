@@ -74,6 +74,7 @@ public class CreateItemActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "Item added with ID: " + documentReference.getId());
+                        goHome();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
