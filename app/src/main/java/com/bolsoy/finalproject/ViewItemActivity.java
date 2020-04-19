@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +33,7 @@ public class ViewItemActivity extends AppCompatActivity {
     private TextView mPriceField;
     private TextView mDescriptionLabel;
     private TextView mDescriptionField;
+    private TextView mEmailField;
     private DocumentReference mItemRef;
 
     @Override
@@ -48,6 +50,7 @@ public class ViewItemActivity extends AppCompatActivity {
         mPriceField = findViewById(R.id.price);
         mDescriptionLabel = findViewById(R.id.description_label);
         mDescriptionField = findViewById(R.id.description);
+        mEmailField = findViewById(R.id.email);
 
 //        String email = getIntent().getExtras().getString("email");
         String id = getIntent().getExtras().getString("id");
@@ -62,12 +65,12 @@ public class ViewItemActivity extends AppCompatActivity {
                 mTitleField.setText(i.getTitle());
                 mPriceField.setText(i.getPrice());
                 mDescriptionField.setText(i.getDescription());
+                mEmailField.setText(i.getEmail());
             }
         });
     }
 
-
-    public void buyItem(View view) {
-
+    public void contactSeller(View view) {
+        Toast.makeText(this, "Email action not fully implemented yet.", Toast.LENGTH_SHORT).show();
     }
 }

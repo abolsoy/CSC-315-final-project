@@ -72,12 +72,34 @@
         app:layout_constraintTop_toBottomOf="@id/price"
         app:layout_constraintVertical_chainStyle="packed" />
 
+    <TextView
+        android:id="@+id/email_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email_label"
+        android:layout_marginTop="13dp"
+        android:layout_margin="10dp"
+        app:layout_constraintEnd_toStartOf="@id/email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_margin="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/email_label"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintVertical_chainStyle="packed" />
+
     <Button
         android:id="@+id/buy_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/buy"
-        android:onClick="buyItem"
+        android:onClick="contactSeller"
         android:backgroundTint="@color/blue"
         android:textColor="@color/white"
         android:layout_marginBottom="50dp"
