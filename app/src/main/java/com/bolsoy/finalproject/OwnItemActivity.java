@@ -1,8 +1,10 @@
 package com.bolsoy.finalproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -72,6 +75,21 @@ public class OwnItemActivity extends AppCompatActivity {
     }
 
     public void deleteItem(View view) {
-        Toast.makeText(this, "Delete item action not fully implemented yet.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Post deleted.", Toast.LENGTH_SHORT).show();
+        mItemRef.delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+        Intent intent = new Intent(this, AccountActivity.class);
+        startActivity(intent);
     }
 }

@@ -3,6 +3,7 @@ package com.bolsoy.finalproject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +37,9 @@ public class ViewItemActivity extends AppCompatActivity {
     private TextView mEmailField;
     private DocumentReference mItemRef;
 
+    private String itemSeller;
+    private String itemTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,15 +63,23 @@ public class ViewItemActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Item i = documentSnapshot.toObject(Item.class);
-                mTitleField.setText(i.getTitle());
+                itemSeller = i.getEmail();
+                itemTitle = i.getTitle();
+                mTitleField.setText(itemTitle);
                 mPriceField.setText(i.getPrice());
                 mDescriptionField.setText(i.getDescription());
-                mEmailField.setText(i.getEmail());
+                mEmailField.setText(itemSeller);
             }
         });
     }
 
     public void contactSeller(View view) {
-        Toast.makeText(this, "Email action not fully implemented yet.", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Email action not fully implemented yet.", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{itemSeller});
+        intent.putExtra(Intent.EXTRA_SUBJECT, itemTitle);
+        intent.putExtra(Intent.EXTRA_TEXT, "I am interested in this item. Is it still available for purchase?");
+        startActivity(intent);
     }
 }
