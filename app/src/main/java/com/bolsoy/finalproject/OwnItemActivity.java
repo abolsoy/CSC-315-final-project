@@ -28,7 +28,6 @@ public class OwnItemActivity extends AppCompatActivity {
     //    private final FirebaseFirestore mDb = FirebaseFirestore.getInstance();
     private FirebaseFirestore mFirestore;
 
-
     private ConstraintLayout mCreateItem;
     private TextView mTitleLabel;
     private TextView mTitleField;
@@ -38,6 +37,7 @@ public class OwnItemActivity extends AppCompatActivity {
     private TextView mDescriptionField;
     private TextView mEmailField;
     private DocumentReference mItemRef;
+    private String itemId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,7 @@ public class OwnItemActivity extends AppCompatActivity {
 
 //        String email = getIntent().getExtras().getString("email");
         String id = getIntent().getExtras().getString("id");
+        itemId = id;
         mFirestore = FirebaseFirestore.getInstance();
         mItemRef = mFirestore.collection("item").document(id);
 
@@ -71,11 +72,13 @@ public class OwnItemActivity extends AppCompatActivity {
     }
 
     public void editItem(View view) {
-        Toast.makeText(this, "Edit item action not fully implemented yet.", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, EditItemActivity.class);
+        intent.putExtra("id", itemId);
+        startActivity(intent);
     }
 
     public void deleteItem(View view) {
-        Toast.makeText(this, "Post deleted.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Item deleted.", Toast.LENGTH_SHORT).show();
         mItemRef.delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
