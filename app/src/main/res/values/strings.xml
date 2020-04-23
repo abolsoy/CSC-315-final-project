@@ -18,4 +18,6 @@
     <string name="item_price_label">$</string>
     <string name="created_on">Posted on %1$s</string>
     <string name="email_label">Email</string>
+    <string name="delete">Delete Item</string>
+    <string name="edit">Edit Item</string>
 </resources>

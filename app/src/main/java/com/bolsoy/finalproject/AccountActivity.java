@@ -52,7 +52,7 @@ public class AccountActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
         Query query = mDb.collection(ITEM)
-                .orderBy("createdTime", Query.Direction.ASCENDING);
+                .orderBy("createdTime", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Item> options = new FirestoreRecyclerOptions.Builder<Item>()
                 .setQuery(query, Item.class)
                 .build();
@@ -66,7 +66,7 @@ public class AccountActivity extends AppCompatActivity {
                 String email = item.getEmail();
                 String title = item.getTitle();
                 String id = mAdapter.getSnapshots().getSnapshot(position).getId();
-                itemClick(id);
+                itemClick(id, email);
 
 //                Item item = mAdapter.getSnapshots().getSnapshot(position).toObject(Item.class);
 //                String id = mAdapter.getSnapshots().getSnapshot(position).getId();
@@ -78,12 +78,19 @@ public class AccountActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
     }
 
-    public void itemClick(String id) {
+    public void itemClick(String id, String item_email) {
         Log.w(TAG, "itemClick() function");
-        Intent intent = new Intent(this, ViewItemActivity.class);
-//        intent.putExtra("email", email);
-        intent.putExtra("id", id);
-        startActivity(intent);
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String user_email = currentUser.getEmail();
+        if (item_email.equals(user_email)) {
+            Intent intent = new Intent(this, OwnItemActivity.class);
+            intent.putExtra("id", id);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(this, ViewItemActivity.class);
+            intent.putExtra("id", id);
+            startActivity(intent);
+        }
     }
 
     @Override

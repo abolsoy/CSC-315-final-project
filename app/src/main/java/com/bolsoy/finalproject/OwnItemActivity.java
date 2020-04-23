@@ -16,9 +16,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class ViewItemActivity extends AppCompatActivity {
+public class OwnItemActivity extends AppCompatActivity {
 
-    private static final String TAG = "ViewItemActivity";
+    private static final String TAG = "OwnItemActivity";
     private static final String ITEM = "item";
 
     private FirebaseAuth mAuth;
@@ -39,7 +39,7 @@ public class ViewItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_item);
+        setContentView(R.layout.activity_own_item);
 
         mTitleLabel = findViewById(R.id.title_label);
         mTitleField = findViewById(R.id.title);
@@ -67,7 +67,11 @@ public class ViewItemActivity extends AppCompatActivity {
         });
     }
 
-    public void contactSeller(View view) {
-        Toast.makeText(this, "Email action not fully implemented yet.", Toast.LENGTH_SHORT).show();
+    public void editItem(View view) {
+        Toast.makeText(this, "Edit item action not fully implemented yet.", Toast.LENGTH_SHORT).show();
+    }
+
+    public void deleteItem(View view) {
+        Toast.makeText(this, "Delete item action not fully implemented yet.", Toast.LENGTH_SHORT).show();
     }
 }
