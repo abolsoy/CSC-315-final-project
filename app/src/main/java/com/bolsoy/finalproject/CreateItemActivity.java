@@ -4,12 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +23,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.Date;
+
+import io.grpc.Context;
+
+import static java.lang.System.*;
 
 public class CreateItemActivity extends AppCompatActivity {
 
@@ -30,6 +41,7 @@ public class CreateItemActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private final FirebaseFirestore mDb = FirebaseFirestore.getInstance();
+    private StorageReference mStorageReference;
 
     private ConstraintLayout mCreateItem;
     private TextView mTitleLabel;
@@ -38,6 +50,10 @@ public class CreateItemActivity extends AppCompatActivity {
     private EditText mPriceField;
     private TextView mDescriptionLabel;
     private EditText mDescriptionField;
+    public Uri imguri;
+    private ImageView img;
+    private Boolean imageSelected = false;
+    public String storageName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +66,9 @@ public class CreateItemActivity extends AppCompatActivity {
         mPriceField = findViewById(R.id.price);
         mDescriptionLabel = findViewById(R.id.description_label);
         mDescriptionField = findViewById(R.id.description);
+        img = findViewById(R.id.image);
+
+        mStorageReference = FirebaseStorage.getInstance().getReference("images");
 
     }
 
@@ -64,10 +83,17 @@ public class CreateItemActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         String email = currentUser.getEmail();
+        String imagePath;
+        if (imageSelected) {
+            Fileuploader();
+            imagePath = "images/" + storageName;
+        } else {
+            imagePath = null;
+        }
 
-        Item newItem = new Item(title, description, price, dateCreated, email);
+        Item newItem = new Item(title, description, price, dateCreated, email, imagePath);
 
-        Toast.makeText(this, "Listing " + title + " for $" + price, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Posting " + title + " for $" + price, Toast.LENGTH_SHORT).show();
         mDb.collection(ITEM)
                 .add(newItem)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -83,7 +109,6 @@ public class CreateItemActivity extends AppCompatActivity {
                         Log.w(TAG, "Error adding item", e);
                     }
                 });
-
     }
 
     public void goHome() {
@@ -126,4 +151,45 @@ public class CreateItemActivity extends AppCompatActivity {
 
         return valid;
     }
+
+
+    public void selectImage(View view) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            imguri = data.getData();
+            img.setImageURI(imguri);
+            imageSelected = true;
+        }
+    }
+
+    private String getExtension(Uri uri) {
+        ContentResolver cr = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(cr.getType(uri));
+    }
+
+    private void Fileuploader() {
+        long millis = System.currentTimeMillis();
+        String mill = String.valueOf(millis);
+        storageName = mill + "." + getExtension(imguri);
+        StorageReference Ref = mStorageReference.child(storageName);
+
+        Ref.putFile(imguri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+//                        Toast.makeText(CreateItemActivity.this, "Image uploaded", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
 }

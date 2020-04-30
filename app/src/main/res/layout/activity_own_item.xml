@@ -94,6 +94,18 @@
         app:layout_constraintTop_toBottomOf="@id/description"
         app:layout_constraintVertical_chainStyle="packed" />
 
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="12dp"
+        android:scaleType="fitCenter"
+        android:contentDescription="image"
+        app:layout_constraintTop_toBottomOf="@id/email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/edit_button" />
+
     <Button
         android:id="@+id/edit_button"
         android:layout_width="match_parent"
@@ -115,7 +127,7 @@
         android:onClick="deleteItem"
         android:backgroundTint="@color/blue"
         android:textColor="@color/white"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

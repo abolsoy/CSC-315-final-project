@@ -17,13 +17,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-// TODO:
-// Landscape orientation
-// Back button on toolbar
-// If user created the item, the "Contact Seller" button should
-// say "Edit Item" instead
-// Menu bar with options
-
 // "Home" screen
 
 public class AccountActivity extends AppCompatActivity {
@@ -107,13 +100,13 @@ public class AccountActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mAuth.signOut();
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        mAuth.signOut();
+//        Intent intent = new Intent(this, LoginActivity.class);
+//        startActivity(intent);
+//    }
 
     private void updateUI(FirebaseUser currentUser) {
         if (currentUser != null) {
