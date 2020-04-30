@@ -29,7 +29,6 @@ public class OwnItemActivity extends AppCompatActivity {
     private static final String ITEM = "item";
 
     private FirebaseAuth mAuth;
-    //    private final FirebaseFirestore mDb = FirebaseFirestore.getInstance();
     private FirebaseFirestore mFirestore;
     private final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
@@ -89,7 +88,7 @@ public class OwnItemActivity extends AppCompatActivity {
                             .load(image)
                             .into(mItemImageView);
                 } else if (imagePath == null) {
-
+                    Toast.makeText(OwnItemActivity.this, "There is no image for this item", Toast.LENGTH_LONG).show();
                 }
             }
         });

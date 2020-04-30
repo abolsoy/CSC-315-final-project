@@ -88,7 +88,7 @@ public class ViewItemActivity extends AppCompatActivity {
                             .load(image)
                             .into(mItemImageView);
                 } else if (imagePath == null) {
-
+                    Toast.makeText(ViewItemActivity.this, "There is no image for this item", Toast.LENGTH_LONG).show();
                 }
             }
         });
